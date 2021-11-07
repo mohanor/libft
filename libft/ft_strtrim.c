@@ -10,99 +10,96 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-unsigned int  ft_strlen(const char *s)
+char *ft_strchr(const char *s, int c)
 {
-    unsigned int  len;
-
-    len = 0;
-    while (s[len])
-        len++;
-    return (len);
-}
-
-unsigned int  ft_skipstr(char const *s1, char const *set)
-{
-    unsigned int  index;
-    unsigned int  j;
-    unsigned int  k;
+    int index;
 
     index = 0;
-    j = 0;
-    while(s1[index] && s1[index] == set[j])
+    while (s[index])
     {
+        if (s[index] == c)
+            return ((char *)&s[index]);
         index++;
-        j++;
-        if (set[j] == '\0')
-        {
-            j = 0;
-            k = index;
-        }
     }
 
-
-    return (k + 1);
+    return (NULL);
 }
 
-unsigned int  ft_skipstrfromlast(char const *s1, char const *set)
+unsigned int ft_start(char const *s1, char const *set)
 {
-    unsigned int  index;
-    unsigned int  len_s1;
-    unsigned int  len_set;
-    unsigned int  save_len_set;
-    unsigned int  j;
-    unsigned int  k;
-
-    len_s1 = ft_strlen(s1) - 1;
-    len_set = ft_strlen(set) - 1;
-    save_len_set = len_set;
-    j = 0;
-    while(len_s1 && s1[len_s1] == set[len_set])
+    unsigned int    len;
+    unsigned int    index;
+    
+    len = strlen(s1);
+    index = 0;
+    while (index < len)
     {
-        len_set--;
-        if (len_set == -1)
-        {
-            len_set = save_len_set;
-            k = len_s1;
-        }
-        
-        len_s1--;
+        if (strchr(set, s1[index]) == NULL)
+            break;
+        index++;
     }
-    return (k - 1);
+    printf("start = %d \n", index);
+    return (index);
+}
+
+unsigned int ft_end(char const *s1, char const *set)
+{
+    unsigned int    len;
+    
+    len = strlen(s1) - 1;
+    while (0 <= len)
+    {
+        if (strchr(set, s1[len]) == NULL)
+            break;
+        len--;
+    }
+
+    printf("end = %d \n", len);
+
+    return (len);
 }
 
 char    *ft_strtrim(char const *s1, char const *set)
 {
-    unsigned int    first_s1;
-    unsigned int    last_s1;
-    unsigned int    index;
-    char            *ptr;
+    unsigned int     start_index;
+    unsigned int     end_index;
+    unsigned int     index;
+    char    *ptr;
 
+    if (s1 == NULL)
+        return (NULL);
+
+    if (set == NULL)
+        return (strdup(s1));
+    
     index = 0;
-    first_s1 = ft_skipstr(s1, set);
-    last_s1 = ft_skipstrfromlast(s1, set);
-    ptr = (char *)malloc(last_s1 - first_s1 + 2);
-    while (first_s1 <= last_s1)
+    start_index = ft_start(s1, set);
+    end_index = ft_end(s1, set);
+    
+    ptr = (char *)malloc(end_index - start_index + 2);
+    
+    while (start_index <= end_index)
     {
-        ptr[index] = s1[first_s1];
-        first_s1++;
+        ptr[index] = s1[start_index];
+        start_index++;
         index++;
     }
     ptr[index] = '\0';
     return (ptr);
 }
 
-int main() {
-    // Write C code here
-    char str[] = "HeHeklllo world1HeHe";
-    char *st;
-
-    st = ft_strtrim(str, "He");
+int main()
+{
+   char str[] = "lHHekjHeklllworldH1He5jhgjkl\t";
+   char *cpy;
+   
+   cpy = ft_strtrim(str, "Hl");
+   
+   printf("%s \n", cpy);
     
-    printf("%s", st);
-    
-    
-    return 0;
+  return 0;
 }

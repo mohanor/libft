@@ -19,8 +19,10 @@ void *ft_memcpy(void *dst, const void *src, size_t n)
     index = 0;
     d = (char *)dst;
     s = (const char *)src;
+
     if ((d == NULL) &&(s == NULL))
         return NULL;
+    
     while (index < n)
     {
         d[index] = s[index];

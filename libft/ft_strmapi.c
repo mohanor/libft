@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matef <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 12:54:15 by matef             #+#    #+#             */
-/*   Updated: 2021/11/05 12:54:17 by matef            ###   ########.fr       */
+/*   Created: 2021/11/07 16:30:52 by matef             #+#    #+#             */
+/*   Updated: 2021/11/07 16:30:58 by matef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t  ft_strlen(const char *s)
-{
-    size_t  len;
 
-    len = 0;
-    while (s[len])
-        len++;
-    return (len);
-}
-
-size_t  strlcat(char *dst, const char *src, size_t dstsize)
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-    size_t  len;
-    size_t  index;
+    unsigned int    index;
+    unsigned int    len;
+    char *ptr;
 
     index = 0;
-    len = ft_strlen(dst);
-    while (index < dstsize)
+    while (s[index])
+        index++;
+
+    ptr = (char *)malloc(index);
+
+    index = 0;
+    while (s[index])
     {
-        dst[len + index] = src[index];
+        ptr[index] = f(index, s[index]);
         index++;
     }
 
-    dst[len + index] = '\0';
-    return (ft_strlen(src));
+    return (ptr);
 }

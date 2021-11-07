@@ -12,6 +12,7 @@
 
 
 #include <stdlib.h>
+#include <stdio.h>
 
 int ft_row(char const *s, char c)
 {
@@ -27,15 +28,17 @@ int ft_row(char const *s, char c)
             if (s[index - 1] != c && index != 0)
             {
                 rows++;
-                printf("\n");
             }
         }
         index++;
     }
+    
+    if (s[index - 1] != c)
+      rows++;
     return rows;
 }
 
-char    **ft_split(char const *s, char c)
+char    **ft_emptytab(char const *s, char c)
 {
     int rows;
     int index;
@@ -49,26 +52,82 @@ char    **ft_split(char const *s, char c)
     i = 0;
     while (s[index])
     {
-        if (s[index] == c) {
+        if (s[index] == c)
+        {
             if (s[index - 1] != c && index != 0)
             {
-                ptr[rows] = (char *)malloc(i);
+                ptr[rows] = (char *)malloc(i + 1);
                 i = 0;
                 rows++;
-                printf("\n");
             }
-        }else {
-
+        }
+        else
+        {
             i++;
         }
         index++;
     }
     
+    if (s[index - 1] != c)
+    {
+      ptr[rows] = (char *)malloc(i + 1);
+    }
     return ptr;
+}
+
+char    **ft_split(char const *s, char c)
+{
+    char **split_str;
+    int index = 0;
+    int rows;
+    int i;
+    
+    i = 0;
+    rows = 0;
+    split_str = ft_emptytab(s, c);
+    
+    while (s[index])
+    {
+        if (s[index] == c)
+        {
+            if (s[index - 1] != c && index != 0)
+            {
+                split_str[rows][i] = '\0';
+                i = 0;
+                rows++;
+            }
+        }
+        else
+        {
+            split_str[rows][i] = s[index];
+            i++;
+        }
+        index++;
+    }
+    
+    if (s[index - 1] != c)
+    {
+      split_str[rows][i] = '\0';
+    }
+    
+    return split_str;
 }
 
 int main()
 {
-  ft_split("HHHHHHHHhekjHeklllo HHHHHHHHHworldH1He587He12HjgjhgjklH",'H');
+    char **pt;
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+  pt = ft_split("lHHekjHeklllworldH1He5jhgjkl",'l');
+  
+  while (pt[i])
+  {
+      printf("%s \n", pt[i]);
+      i++;
+  }
   return 0;
 }
+
