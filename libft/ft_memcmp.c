@@ -10,12 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int memcmp(const void *s1, const void *s2, size_t n)
-{
-
-}
-
-
 
 int ft_memcmp(const char *s1, const char *s2, size_t n)
 {

@@ -22,6 +22,8 @@ char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
         index++;
 
     ptr = (char *)malloc(index);
+    if (ptr == NULL)
+        return (NULL);
 
     index = 0;
     while (s[index])

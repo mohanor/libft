@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matef <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 09:48:55 by matef             #+#    #+#             */
-/*   Updated: 2021/11/08 12:52:03 by matef            ###   ########.fr       */
+/*   Created: 2021/11/08 10:29:39 by matef             #+#    #+#             */
+/*   Updated: 2021/11/08 10:29:50 by matef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_bzero (void *s, size_t n)
-{
-	size_t	index;
-	char	*str;
 
-	index = 0;
-	str = (char *)s;
-	while (index < n)
-	{
-		str[index] = 0;
-		index++;
-	}
+void    ft_striteri(char *s, void (*f)(unsigned int,char*))
+{
+    unsigned int    index;
+
+    index = 0;
+    while (s[index])
+    {
+        f(index, &s[index]);
+        index++;
+    }
 }
