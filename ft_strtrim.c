@@ -52,8 +52,8 @@ char    *ft_strtrim(char const *s1, char const *set)
     unsigned int     index;
     char    *ptr;
 
-    if (s1 == NULL)
-        return (0);
+    if (s1 == NULL || *s1 == '\0')
+	        return (char *)s1;
 
     if (set == NULL)
         return (ft_strdup(s1));
@@ -63,7 +63,7 @@ char    *ft_strtrim(char const *s1, char const *set)
     end_index = ft_end(s1, set);
     
     ptr = (char *)malloc(end_index - start_index + 2);
-    
+    if (ptr == NULL) return 0;
     while (start_index <= end_index)
     {
         ptr[index] = s1[start_index];

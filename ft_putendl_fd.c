@@ -16,6 +16,7 @@ void ft_putendl_fd(char *s, int fd)
 {
     unsigned int    index;
 
+    if (s == NULL) return;
     index = 0;
     while (s[index])
     {

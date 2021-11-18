@@ -46,7 +46,7 @@ char    **ft_emptytab(char const *s, char c)
     
     index = 0;
     rows = ft_row(s, c);
-    ptr = (char **)malloc(rows * sizeof(char *));
+    ptr = (char **)malloc(rows * sizeof(char **));
     if (ptr == NULL)
         return 0;
     rows = 0;
@@ -58,6 +58,7 @@ char    **ft_emptytab(char const *s, char c)
             if (s[index - 1] != c && index != 0)
             {
                 ptr[rows] = (char *)malloc(i + 1);
+                if(ptr[rows] == NULL) return 0;
                 i = 0;
                 rows++;
             }
@@ -83,6 +84,7 @@ char    **ft_split(char const *s, char c)
     int rows;
     int i;
     
+    if (s == NULL) return 0;
     i = 0;
     rows = 0;
     split_str = ft_emptytab(s, c);
@@ -113,3 +115,5 @@ char    **ft_split(char const *s, char c)
     
     return split_str;
 }
+
+

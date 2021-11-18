@@ -17,6 +17,7 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
     unsigned int    index;
     char *str;
 
+    if (s == NULL) return 0;
     index = 0;
     if (start >= ft_strlen(s))
     {
@@ -26,11 +27,11 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
         str[0] = '\0';
         return str;
     }
+
+
     str = (char *)malloc(len + 1);
     if (str == NULL)
         return (0);
-
-    
         
     while (len)
     {

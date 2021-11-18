@@ -19,9 +19,11 @@ char    *ft_strjoin(char const *s1, char const *s2)
     size_t  last_index;
     char    *str;
 
+    if(s1 == NULL || s2 == NULL) return 0;
+
     index = 0;
     len = ft_strlen(s1) + ft_strlen(s2);
-    str = (char *)malloc(len);
+    str = (char *)malloc((len + 1) * sizeof(char));
     if (str == NULL)
         return (0);
     
@@ -38,5 +40,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
         str[last_index + index] = s2[index];
         index++;
     }
+
+    str[last_index + index] = '\0';
     return (str);
 }

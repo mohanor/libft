@@ -33,6 +33,7 @@ char *ft_itoa(int n)
     char            *tab;
 
     tab = (char *)malloc(12);
+    if (tab == NULL) return 0;
     index = 0;
     if (0 <= n && n <= 9)
     {
