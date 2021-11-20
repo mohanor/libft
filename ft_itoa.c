@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void ft_putnbr(unsigned int nbr, char *tab, int *index)
+void ft_putnbr(long int nbr, char *tab, int *index)
 {
    if ( nbr < 10)
    {
@@ -23,34 +23,42 @@ void ft_putnbr(unsigned int nbr, char *tab, int *index)
 
    ft_putnbr(nbr / 10, tab, index);
    ft_putnbr(nbr % 10, tab, index);
-   tab[*index] = '\0';
+}
+
+int ft_nbr_digit(long int n)
+{
+    int i = 1;
+    if (n < 0) n = n * -1;
+    while (n > 9)
+    {
+        n = n / 10;
+        i++;
+    }
+    return i;
 }
 
 char *ft_itoa(int n)
 {
-    unsigned int    nbr;
-    int             index;
-    char            *tab;
+    int         count;
+    int         index;
+    long int    nbr;
+    char        *tab;
 
-    tab = (char *)malloc(12);
-    if (tab == NULL) return 0;
+    nbr = n;
+    count = ft_nbr_digit(nbr);
+    if (nbr < 0)
+        count += 1;
+    tab = (char *)malloc(count + 1);
+    if (tab == NULL)
+        return 0;
     index = 0;
-    if (0 <= n && n <= 9)
+    if (nbr < 0)
     {
-        tab[index++] = n + 48;
-        tab[index] = '\0';
-        return (tab);
-    }
-
-    if (n < 0)
-    {
-        nbr = -n;
+        nbr *= -1;
         tab[index] = '-';
         index++;
     }
-    else
-        nbr = n;
-    
     ft_putnbr(nbr, tab, &index);
+    tab[index] = '\0';
     return tab;
 }

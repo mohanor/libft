@@ -12,7 +12,30 @@
 
 #include "libft.h"
 
+void ft_pnbr(long int nbr, int fd)
+{
+    char c;
+
+    if (nbr < 0)
+    {
+        c = '-';
+        write(fd, &c, 1);
+        nbr *= -1;
+    }
+    if ( nbr < 10)
+    {
+        c = nbr + 48;
+        write(fd, &c, 1);
+        return ;
+    }
+
+   ft_pnbr(nbr / 10, fd);
+   ft_pnbr(nbr % 10, fd);
+}
+
 void ft_putnbr_fd(int n, int fd)
 {
-    ft_putstr_fd(ft_itoa(n), fd);
+    long int nbr;
+    nbr = n;
+    ft_pnbr(nbr, fd);
 }

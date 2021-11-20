@@ -45,13 +45,23 @@ unsigned int ft_end(char const *s1, char const *set)
     return (len);
 }
 
+char *ft_blank()
+{
+    char	*ret;
+
+    ret = malloc(1);
+    if (!ret)
+        return (NULL);
+    ret[0] = '\0';
+    return (ret);
+}
 char    *ft_strtrim(char const *s1, char const *set)
 {
     unsigned int     start_index;
     unsigned int     end_index;
     unsigned int     index;
     char    *ptr;
-
+    
     if (s1 == NULL || *s1 == '\0')
 	        return (char *)s1;
 
@@ -60,8 +70,11 @@ char    *ft_strtrim(char const *s1, char const *set)
     
     index = 0;
     start_index = ft_start(s1, set);
+    if (start_index == ft_strlen(s1))
+        return (ft_blank());
     end_index = ft_end(s1, set);
-    
+
+
     ptr = (char *)malloc(end_index - start_index + 2);
     if (ptr == NULL) return 0;
     while (start_index <= end_index)

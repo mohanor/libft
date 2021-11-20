@@ -13,107 +13,85 @@
 
 #include "libft.h"
 
-int ft_row(char const *s, char c)
+int ft_rows(char const *s, char c)
 {
-    int index;
+    int i;
     int rows;
-     
-    rows = 0;
-    index = 0;
-    while (s[index])
-    {
-        if (s[index] == c)
-        {
-            if (s[index - 1] != c && index != 0)
-            {
-                rows++;
-            }
-        }
-        index++;
-    }
     
-    if (s[index - 1] != c)
-      rows++;
+    i = 0;
+    rows = 0;
+    while(*s && *s == c)
+        s++;
+
+    while (s[i])
+    {
+        if(s[i] == c && (s[i + 1] != c || s[i + 1] == '\0'))
+            rows++;
+        i++;
+    }
     return rows;
 }
 
-char    **ft_emptytab(char const *s, char c)
+char *ft_skipechar(char const *s, char c)
 {
-    int rows;
-    int index;
+    while(*s && *s == c)
+        s++;
+    return (char *)s;
+}
+
+int ft_len_of_row(char const *s, char c)
+{
     int i;
-    char **ptr;
+    char *st;
     
-    index = 0;
-    rows = ft_row(s, c);
-    ptr = (char **)malloc(rows * sizeof(char **));
-    if (ptr == NULL)
-        return 0;
-    rows = 0;
     i = 0;
-    while (s[index])
+    while (s[i] && s[i] != c)
     {
-        if (s[index] == c)
-        {
-            if (s[index - 1] != c && index != 0)
-            {
-                ptr[rows] = (char *)malloc(i + 1);
-                if(ptr[rows] == NULL) return 0;
-                i = 0;
-                rows++;
-            }
-        }
-        else
-        {
-            i++;
-        }
-        index++;
+        i++;
     }
-    
-    if (s[index - 1] != c)
-    {
-      ptr[rows] = (char *)malloc(i + 1);
-    }
-    return ptr;
+    return i;
 }
 
 char    **ft_split(char const *s, char c)
-{
-    char **split_str;
-    int index = 0;
-    int rows;
-    int i;
+{   
+    char **ptr;
+    char    *str;
+    int     j;
+    int len;
+    int k;
     
-    if (s == NULL) return 0;
-    i = 0;
-    rows = 0;
-    split_str = ft_emptytab(s, c);
+    j = 0;
+    k = 0;
+    len = 0;
+
+if (!s) return 0;
+    ptr = (char **)malloc((ft_rows(s , c) + 1) * sizeof(char *));
+    if (!ptr) return 0;
     
-    while (s[index])
+    str = ft_skipechar(s, c);
+    while (*str)
     {
-        if (s[index] == c)
+        len = ft_len_of_row(str,c);
+        ptr[j] = (char *)malloc((len + 1) * sizeof(char));
+        if (!ptr[j])
         {
-            if (s[index - 1] != c && index != 0)
-            {
-                split_str[rows][i] = '\0';
-                i = 0;
-                rows++;
-            }
+            free(ptr);
+            return 0;
         }
-        else
+
+        while (k < len)
         {
-            split_str[rows][i] = s[index];
-            i++;
+            ptr[j][k] = str[k];
+            k++;
         }
-        index++;
+
+        ptr[j][k] = '\0';
+        str = ft_skipechar(str + len, c);
+
+        j++;
+        k = 0;
     }
-    
-    if (s[index - 1] != c)
-    {
-      split_str[rows][i] = '\0';
-    }
-    
-    return split_str;
+
+    ptr[j] = 0;
+    return ptr;
 }
-
-
