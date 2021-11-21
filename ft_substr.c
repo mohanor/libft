@@ -6,39 +6,31 @@
 /*   By: matef <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 10:52:24 by matef             #+#    #+#             */
-/*   Updated: 2021/11/06 10:52:26 by matef            ###   ########.fr       */
+/*   Updated: 2021/11/20 22:29:49 by matef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    unsigned int    index;
-    char *str;
+	int		index;
+	char	*str;
 
-    if (s == NULL) return 0;
-    index = 0;
-    if (start >= ft_strlen(s))
-    {
-        str = (char *)malloc(1);
-        if (str == NULL)
-            return (0);
-        str[0] = '\0';
-        return str;
-    }
-
-
-    str = (char *)malloc(len + 1);
-    if (str == NULL)
-        return (0);
-        
-    while (len)
-    {
-        str[index++] = s[start++];
-        len--;
-    }
-
-    str[index] = '\0';
-    return ((char *)str);
+	index = 0;
+	if (!s)
+		return (0);
+	if (ft_strlen(s + start) < len)
+		str = (char *)malloc((ft_strlen(s + start) + 1) * sizeof(char));
+	else
+		str = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!str)
+		return (0);
+	while (index < (int)len && s[start + index] && !(start >= ft_strlen(s)))
+	{
+		str[index] = s[start + index];
+		index++;
+	}
+	str[index] = '\0';
+	return (str);
 }

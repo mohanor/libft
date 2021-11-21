@@ -6,15 +6,13 @@
 /*   By: matef <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 09:23:14 by matef             #+#    #+#             */
-/*   Updated: 2021/11/05 09:23:16 by matef            ###   ########.fr       */
+/*   Updated: 2021/11/20 22:32:20 by matef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isascii(int c)
+int	ft_isascii(int c)
 {
-    if (0 <= c && c <= 127)
-        return (1);
-    return (0);
+	return (0 <= c && c <= 127);
 }

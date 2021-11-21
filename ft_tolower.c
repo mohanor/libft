@@ -6,15 +6,15 @@
 /*   By: matef <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:03:56 by matef             #+#    #+#             */
-/*   Updated: 2021/11/05 13:03:57 by matef            ###   ########.fr       */
+/*   Updated: 2021/11/20 22:55:15 by matef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
-    if ('A' <= c && c <= 'Z')
-        return (c + 32);
-    return (c);
+	if ('A' <= c && c <= 'Z')
+		return (c + 32);
+	return (c);
 }

@@ -6,15 +6,13 @@
 /*   By: matef <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 09:25:08 by matef             #+#    #+#             */
-/*   Updated: 2021/11/05 09:25:09 by matef            ###   ########.fr       */
+/*   Updated: 2021/11/20 22:57:32 by matef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
-    if (32 <= c && c <= 126)
-        return (1);
-    return (0);
+	return (32 <= c && c <= 126);
 }
