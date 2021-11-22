@@ -23,7 +23,7 @@ static int	ft_rows(char const *s, char c)
 		s++;
 	while (s[i])
 	{
-		if (s[i] == c && (s[i + 1] != c || s[i + 1] == '\0'))
+		if ((s[i] == c && s[i + 1] != c) || s[i + 1] == '\0')
 			rows++;
 		i++;
 	}
@@ -40,7 +40,6 @@ static char	*ft_skipechar(char const *s, char c)
 static int	ft_len_of_row(char const *s, char c)
 {
 	int		i;
-	char	*st;
 
 	i = 0;
 	while (s[i] && s[i] != c)
